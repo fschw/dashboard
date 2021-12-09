@@ -32,7 +32,7 @@ header = {"Authorization": "Bearer " + token}
 font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
 
 try:
-    epd = waveshare_epd.epd4in2.EPD()
+    epd = epd4in2.EPD()
     logging.info("init and Clear")
     epd.init()
     epd.Clear()
