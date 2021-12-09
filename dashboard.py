@@ -2,19 +2,22 @@
 # -*- coding:utf-8 -*-
 import os
 import sys
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
-libdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'e-Paper\\RaspberryPi_JetsonNano\\python\\lib')
+libdir = os.path.join(os.path.join(os.path.join(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'e-Paper'),'RaspberryPi_JetsonNano'),'python'),'lib')
 if os.path.exists(libdir):
     sys.path.append(libdir)
+logging.info("Add lib dir: "+ libdir)
 
 libdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Adafruit_Python_DHT')
 if os.path.exists(libdir):
     sys.path.append(libdir)
+logging.info("Add lib dir: "+ libdir)
 
+picdir = os.path.join(os.path.join(os.path.join(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'e-Paper'),'RaspberryPi_JetsonNano'),'python'),'pic')
+logging.info("Add pic dir: "+ picdir)
 
-picdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'e-Paper/RaspberryPi_JetsonNano/python/pic')
-
-import logging
 import Adafruit_DHT
 import waveshare_epd # import epd4in2
 import time
@@ -22,7 +25,7 @@ from PIL import Image, ImageDraw, ImageFont
 import traceback
 import requests
 
-logging.basicConfig(level=logging.DEBUG)
+
 
 token = "eyJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAtMjU2In0.VTZdnH0IIZxxIMidsjR74w2NPhTHSu5H-QgxYPYc1o6vMY351re3mnhWjSsSvOOnmyGHH3KjaCifllzVr5Dqf8_Gd-oKD7tPjvNYP7GLGOdlK_Fj633j3yc4j9uM1aWNpQE4VTjCqY-fpPNff7Bk2dc_MI_YUu1ahKkkKOVu91ynSh_nV0Qovss765260lMHjW3R9ic8fGrlp7uHLOj8R2elOS5DrefFoy6OOkT_3gD0voGPl2Z97qqjeZY7KVUz_havJWf84BhfUFd0DjjvBJGel6q60Eja4TnAL-ZCltxb8Ljpwjnrrkv6rMSvtUvsefKAkKAqCSYJV6q3aZVv7RIklmR68Q6VrxKh7e7cTDaEOFubye6-0aD0hxkh4OZHU6_yfaqXDFVBy20DjxiOTqDZnJ5aWRyyGNP-yy7vZYWo9sdJThBVgMjGFgJJQQCJjci0FAO3xd2HCo72nhbsdTLRh05aj1nKLsMPCu7pHd3gUaiIWjXNT1CTkZANe4fCCv2-4yBnk5ock1W65shn0RLWFIiUs7vQVXBIh7k33S3sXc71fmfR11uXkxDbG8nRwsWRfyvLYBjHwlmpV950FjMmlAldIEDZKJjr91N1sctxNLSNVzv1Qezf4Lhh1bBGOoZdz6BfzZ7ePwaRR_AiCZS7wnSj_NvaiznuZbVpkWg.R5xLnvtGSSuoIIie.EFZ0UDR80iXcUdJpbeobxRSv4r7FSUSCdelfHWHDhFZrof5EYSpsr4F3XKKCuIcPZV_irP-R0APIwBUB_f7C--HrYsNFcNarMR2vNncQMitZtpsGYFvsoAXcEX0Ry4V0evfPSLOo9tnkwBG2viC0vRsJ5Pl_qtougBVwXxVcEuIJmqOzNeq4OZhUBLON6Ok6eJxNVOs28FhjK9cr4kPVGDNv-59W9eD7lC6NSuIxPgOIU3xqvn-fDWtoWvNnOQW6gpEKe3ddefd7nsDvcD9Y-GWIKTMv3tH1edF1jYHC6Uy0Uk4zVPfebnqTupA6CamsX5PGSbbHxTEjblNTAs4jL-EZS0MGQPugCzSFjI-nxkh5i-cfslgClQrvVsFJDJxiRPO1-4KAHXZubg4T5V6shtfoPq_zKnQY0WNf-qFAFrkRu5ySh2PO5jI7R3mewYErDQKCczuyxZUEeMB393nxPqK3YDoFUe5y6Hwv2Lah8lGJ3Tqy2VV7PSUaxnEFNDOgJpDjnr2hdSlv3i7YLrP-Ao5E5iANhXjW0PB595C9qnRrpQ-YPN9BwhwK4Pgqf6ScIe-MZz3_EGp1uFYi4FU76vQ5xXWcLqcOUrkpDIrzDxVDTxnCHTlmCz4E7flOtClsUzpsLFurB06c2jWn-y-5mzt5uOKPhp7qDdGKaqBAYJj_-CUJVgPlRyqr5T2D3QaflCk-4Dc4eDL8avsEsSEGlUIdQo5KDPbcfqMCFFFBGU4vybjDNAxy_FsSDT-9hq7ir_QpjbtsW8QkeFCKY68GGXu7xTbONcdmn4h9XBmtLrb4fi57fAzXu4GAimcnvyMxOYibTv8Fqa3G44Or9J0ZJO9N9vYRLZ8lNNrl_Eam8BuVVZVxKvvJlhCGFLnrqm2yJaMfMWV-2xbd2d7bYdypYN721fqJFJE2C0NXhkNZAsYbC-VIh-ov0ud-e_my09KY5XjNEYq3o14xhaouSP2mXpnZn7XvZslxVH8AJU-ADrtf0YJEMQAJvN9M3wlBXamWTO1vDJHKGYRjdcX3xZPPGI_xm7eYC6zH4oJtXqiH6x1uwah-668EVOWf1zzOsGFMQ9r9tODA5EUszsov2OwA7r83lHYghmUjnCmeh2fIpkzc10dmjpUydV8ZKiG6XvrcEyjFbcIIKbav3gKIEPqruvheShflRaMZtjTT5_fxlz_4KJo1kru_pjLApMKbfeTHa4-bH3nN89eZpOrLxrbDb5l9FtyxDZLv6UVXJ0ATDji8u2DtafHFvjoaqbCMXCokMDJfYlIHy7OWCg1OtWReuk-aKpBxQ24Re5fPsnhRxXtEGRwJAq1aWJnH3KHmhYaolS7d1ELmKX6y-oiG-gof1OY.PvD0sJEh53fz91AB_EAVlA"
 header = {"Authorization": "Bearer " + token}
