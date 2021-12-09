@@ -1,0 +1,6 @@
+[submodule "e-Paper"]
+	path = e-Paper
+	url = https://github.com/waveshare/e-Paper
+[submodule "Adafruit_Python_DHT"]
+	path = Adafruit_Python_DHT
+	url = https://github.com/adafruit/Adafruit_Python_DHT.git
