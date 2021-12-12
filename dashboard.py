@@ -59,8 +59,8 @@ try:
         # outsideTemp = str(response.json()["data"]["properties"]["value"]["value"])
 
         # read humidity and inside temp
-        #logging.info("Read inside temperature and humidity...")
-        #insideHumidity, insideTemp = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 4)
+        logging.info("Read inside temperature and humidity...")
+        insideHumidity, insideTemp = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 4)
 
         image = Image.new('1', (epd.width, epd.height), 255)
         draw = ImageDraw.Draw(image)
@@ -68,16 +68,16 @@ try:
 
         draw.text((10, 0), 'Außen: {:.1f}°'.format(outsideTemp), font=font24, fill=0)
 
-        '''if insideHumidity is not None and insideTemp is not None:
+        if insideHumidity is not None and insideTemp is not None:
             logging.info( 'Innen: {:.1f}°'.format(insideTemp))
             logging.info( 'Rel: {:.1f}%'.format(insideHumidity))
             draw.text((10, 50), 'Innen: {:.1f}°'.format(insideTemp), font = font24, fill = 0)
-            draw.text((10, 100), 'Rel: {:.1f}%'.format(insideHumidity), font = font24, fill = 0)'''
+            draw.text((10, 100), 'Rel: {:.1f}%'.format(insideHumidity), font = font24, fill = 0)
 
         #for i in range(0, int(image.width * image.height / 8)):
         #   epd.send_data(image[i])
 
-        epd.display(epd.getbuffer(image))
+        #epd.display(epd.getbuffer(image))
         time.sleep(10)
 
 
