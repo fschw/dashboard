@@ -61,8 +61,10 @@ def setup(mode=1):
         sys.stdout.write('0')
     sys.stdout.write(str(result) + "\n")
 
-
-setup(1) # Setting mode
+try:
+    setup(1)
+except IOError as e:
+    logging.info(e)
 
 try:
     epd = epd4in2.EPD()
