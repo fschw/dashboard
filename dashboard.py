@@ -5,21 +5,29 @@ import sys
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
-libdir = os.path.join(os.path.join(os.path.join(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'e-Paper'),'RaspberryPi_JetsonNano'),'python'),'lib')
-if os.path.exists(libdir):
-    sys.path.append(libdir)
-logging.info("Add lib dir: "+ libdir)
-
-libdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Adafruit_Python_DHT')
-if os.path.exists(libdir):
-    sys.path.append(libdir)
-logging.info("Add lib dir: "+ libdir)
 
 picdir = os.path.join(os.path.join(os.path.join(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'e-Paper'),'RaspberryPi_JetsonNano'),'python'),'pic')
 logging.info("Add pic dir: "+ picdir)
 
-import Adafruit_DHT
-from waveshare_epd import epd4in2
+#inintialize mockups on dev env, and real libs on rasp
+if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
+    libdir = os.path.join(os.path.join(os.path.join(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'e-Paper'),'RaspberryPi_JetsonNano'),'python'),'lib')
+    if os.path.exists(libdir):
+        sys.path.append(libdir)
+    logging.info("Add lib dir: "+ libdir)
+
+    libdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Adafruit_Python_DHT')
+    if os.path.exists(libdir):
+        sys.path.append(libdir)
+    logging.info("Add lib dir: "+ libdir)
+
+    import Adafruit_DHT
+    from waveshare_epd import epd4in2
+else:
+    sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'mockups'))
+    import Adafruit_DHT_mock
+    from waveshare_epd import epd4in2_mock
+
 import time
 from PIL import Image, ImageDraw, ImageFont
 import traceback
