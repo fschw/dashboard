@@ -49,24 +49,24 @@ try:
     loop = True
     cnt = 1
     while loop:
-        logging.info("Updating for " + str(cnt) + "Iteration")
+        logging.info("Updating for Iteration " + str(cnt))
         cnt = cnt + 1
         # req1 = "https://api.viessmann.com/iot/v1/equipment/installations/952499/gateways/7637415022052208/devices/0/features/heating.sensors.temperature.outside"
         # logging.info("reading temperature.outside")
         # response = requests.get(url=req1, headers=header)
-        outsideTemp = 0.0
+        #outsideTemp = 0.0
         # logging.info(response.json())
         # outsideTemp = str(response.json()["data"]["properties"]["value"]["value"])
 
         # read humidity and inside temp
-        logging.info("Read inside temperature and humidity...")
-        insideHumidity, insideTemp = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 4)
+        #logging.info("Read inside temperature and humidity...")
+        #insideHumidity, insideTemp = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 4)
 
-        image = Image.new('1', (epd.width, epd.height), 255)
-        draw = ImageDraw.Draw(image)
-        logging.info('Außen: {:.1f}°'.format(outsideTemp))
+        #image = Image.new('1', (epd.width, epd.height), 255)
+        #draw = ImageDraw.Draw(image)
+        #logging.info('Außen: {:.1f}°'.format(outsideTemp))
 
-        draw.text((10, 0), 'Außen: {:.1f}°'.format(outsideTemp), font=font24, fill=0)
+        #draw.text((10, 0), 'Außen: {:.1f}°'.format(outsideTemp), font=font24, fill=0)
 
         '''if insideHumidity is not None and insideTemp is not None:
             logging.info( 'Innen: {:.1f}°'.format(insideTemp))
@@ -77,7 +77,7 @@ try:
         #for i in range(0, int(image.width * image.height / 8)):
         #   epd.send_data(image[i])
 
-        epd.display(epd.getbuffer(image))
+        #epd.display(epd.getbuffer(image))
         time.sleep(5)
 
 
