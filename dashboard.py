@@ -3,6 +3,7 @@
 import os
 import sys
 import logging
+import ccs811LIBRARY
 logging.basicConfig(level=logging.DEBUG)
 
 
@@ -41,6 +42,28 @@ header = {"Authorization": "Bearer " + token}
 
 font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
 
+
+sensor = ccs811LIBRARY.CCS811()
+def setup(mode=1):
+    print('Starting CCS811 Read')
+    sensor.configure_ccs811()
+    sensor.set_drive_mode(mode)
+
+    if sensor.check_for_error():
+        sensor.print_error()
+        raise ValueError('Error at setDriveMode.')
+
+    result = sensor.get_base_line()
+    sys.stdout.write("baseline for this sensor: 0x")
+    if result < 0x100:
+        sys.stdout.write('0')
+    if result < 0x10:
+        sys.stdout.write('0')
+    sys.stdout.write(str(result) + "\n")
+
+
+setup(1) # Setting mode
+
 try:
     epd = epd4in2.EPD()
     logging.info("Init and Clear display")
@@ -49,8 +72,11 @@ try:
     loop = True
     cnt = 1
     while loop:
+        image = Image.new('1', (epd.width, epd.height), 255)
+        draw = ImageDraw.Draw(image)
         logging.info("Updating for Iteration " + str(cnt))
         cnt = cnt + 1
+        logging.info("Read outside temp...")
         # req1 = "https://api.viessmann.com/iot/v1/equipment/installations/952499/gateways/7637415022052208/devices/0/features/heating.sensors.temperature.outside"
         # logging.info("reading temperature.outside")
         # response = requests.get(url=req1, headers=header)
@@ -58,21 +84,28 @@ try:
         # logging.info(response.json())
         # outsideTemp = str(response.json()["data"]["properties"]["value"]["value"])
 
+        logging.info('Outside temp: {:.1f}°'.format(outsideTemp))
+        draw.text((10, 0), 'Außen: {:.1f}°'.format(outsideTemp), font=font24, fill=0)
+
         # read humidity and inside temp
         logging.info("Read inside temperature and humidity...")
         insideHumidity, insideTemp = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 4)
 
-        image = Image.new('1', (epd.width, epd.height), 255)
-        draw = ImageDraw.Draw(image)
-        logging.info('Außen: {:.1f}°'.format(outsideTemp))
-
-        draw.text((10, 0), 'Außen: {:.1f}°'.format(outsideTemp), font=font24, fill=0)
-
         if insideHumidity is not None and insideTemp is not None:
-            logging.info( 'Innen: {:.1f}°'.format(insideTemp))
-            logging.info( 'Rel: {:.1f}%'.format(insideHumidity))
+            logging.info( 'Inside temp: {:.1f}°'.format(insideTemp))
+            logging.info( 'Rel. Humidity: {:.1f}%'.format(insideHumidity))
             draw.text((10, 50), 'Innen: {:.1f}°'.format(insideTemp), font = font24, fill = 0)
             draw.text((10, 100), 'Rel: {:.1f}%'.format(insideHumidity), font = font24, fill = 0)
+        else:
+            logging.info( "Could not read from Inside temp/Humidity")
+
+        logging.info("Read CO2 and TVOC...")
+        if sensor.data_available():
+            sensor.read_logorithm_results()
+            logging.info( "CO2: {0:.1f} TVOC: {1:.1f}".format(sensor.CO2, sensor.tVOC))
+            draw.text((10, 150), "CO2: {0:.1f} TVOC: {1:.1f}".format(sensor.CO2, sensor.tVOC), font = font24, fill = 0)
+        elif sensor.check_for_error():
+            logging.info( "Could not read from CO2/TVOC Sensor")
 
         #for i in range(0, int(image.width * image.height / 8)):
         #   epd.send_data(image[i])
