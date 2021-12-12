@@ -46,7 +46,11 @@ try:
     logging.info("Init and Clear display")
     epd.init()
     epd.Clear()
-    while True:
+    loop = True
+    cnt = 1
+    while loop:
+        logging.info("Updating for " + cnt + "Iteration")
+        cnt = cnt + 1
         # req1 = "https://api.viessmann.com/iot/v1/equipment/installations/952499/gateways/7637415022052208/devices/0/features/heating.sensors.temperature.outside"
         # logging.info("reading temperature.outside")
         # response = requests.get(url=req1, headers=header)
@@ -74,7 +78,6 @@ try:
         #   epd.send_data(image[i])
 
         epd.display(epd.getbuffer(image))
-
         time.sleep(5)
 
 
