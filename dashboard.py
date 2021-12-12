@@ -61,10 +61,11 @@ def setup(mode=1):
         sys.stdout.write('0')
     sys.stdout.write(str(result) + "\n")
 
+'''
 try:
     setup(1)
 except IOError as e:
-    logging.info(e)
+    logging.info(e)'''
 
 try:
     epd = epd4in2.EPD()
@@ -101,13 +102,13 @@ try:
         else:
             logging.info( "Could not read from Inside temp/Humidity")
 
-        logging.info("Read CO2 and TVOC...")
+        '''logging.info("Read CO2 and TVOC...")
         if sensor.data_available():
             sensor.read_logorithm_results()
             logging.info( "CO2: {0:.1f} TVOC: {1:.1f}".format(sensor.CO2, sensor.tVOC))
             draw.text((10, 150), "CO2: {0:.1f} TVOC: {1:.1f}".format(sensor.CO2, sensor.tVOC), font = font24, fill = 0)
         elif sensor.check_for_error():
-            logging.info( "Could not read from CO2/TVOC Sensor")
+            logging.info( "Could not read from CO2/TVOC Sensor")'''
 
         #for i in range(0, int(image.width * image.height / 8)):
         #   epd.send_data(image[i])
