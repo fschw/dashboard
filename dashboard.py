@@ -49,7 +49,7 @@ try:
     loop = True
     cnt = 1
     while loop:
-        logging.info("Updating for " + cnt + "Iteration")
+        logging.info("Updating for " + str(cnt) + "Iteration")
         cnt = cnt + 1
         # req1 = "https://api.viessmann.com/iot/v1/equipment/installations/952499/gateways/7637415022052208/devices/0/features/heating.sensors.temperature.outside"
         # logging.info("reading temperature.outside")
