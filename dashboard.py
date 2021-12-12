@@ -75,7 +75,7 @@ try:
 
     epd.display(epd.getbuffer(image))
 
-    time.sleep(5)
+        time.sleep(5)
 
 
 except IOError as e:
