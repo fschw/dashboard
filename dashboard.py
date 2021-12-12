@@ -62,7 +62,7 @@ try:
         #logging.info("Read inside temperature and humidity...")
         #insideHumidity, insideTemp = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 4)
 
-        #image = Image.new('1', (epd.width, epd.height), 255)
+        image = Image.new('1', (epd.width, epd.height), 255)
         #draw = ImageDraw.Draw(image)
         #logging.info('Außen: {:.1f}°'.format(outsideTemp))
 
