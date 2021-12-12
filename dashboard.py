@@ -11,6 +11,7 @@ logging.info("Add pic dir: "+ picdir)
 
 #inintialize mockups on dev env, and real libs on rasp
 if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
+    logging.info("Start in productive mode...")
     libdir = os.path.join(os.path.join(os.path.join(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'e-Paper'),'RaspberryPi_JetsonNano'),'python'),'lib')
     if os.path.exists(libdir):
         sys.path.append(libdir)
@@ -24,6 +25,7 @@ if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
     import Adafruit_DHT
     from waveshare_epd import epd4in2
 else:
+    logging.info("Start in mockup mode...")
     sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'mockups'))
     import Adafruit_DHT_mock
     from waveshare_epd import epd4in2_mock
@@ -41,7 +43,7 @@ font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
 
 try:
     epd = epd4in2.EPD()
-    logging.info("init and Clear")
+    logging.info("Init and Clear display")
     epd.init()
     epd.Clear()
     while True:
@@ -53,6 +55,7 @@ try:
         # outsideTemp = str(response.json()["data"]["properties"]["value"]["value"])
 
         # read humidity and inside temp
+        logging.info("Read inside temperature and humidity...")
         insideHumidity, insideTemp = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 4)
 
         image = Image.new('1', (epd.width, epd.height), 255)
@@ -61,11 +64,11 @@ try:
 
         draw.text((10, 0), 'Außen: {:.1f}°'.format(outsideTemp), font=font24, fill=0)
 
-        if insideHumidity is not None and insideTemp is not None:
+        '''if insideHumidity is not None and insideTemp is not None:
             logging.info( 'Innen: {:.1f}°'.format(insideTemp))
             logging.info( 'Rel: {:.1f}%'.format(insideHumidity))
             draw.text((10, 50), 'Innen: {:.1f}°'.format(insideTemp), font = font24, fill = 0)
-            draw.text((10, 100), 'Rel: {:.1f}%'.format(insideHumidity), font = font24, fill = 0)
+            draw.text((10, 100), 'Rel: {:.1f}%'.format(insideHumidity), font = font24, fill = 0)'''
 
         #for i in range(0, int(image.width * image.height / 8)):
         #   epd.send_data(image[i])
