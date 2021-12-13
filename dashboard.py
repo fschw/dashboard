@@ -33,6 +33,7 @@ else:
 
 import time
 from PIL import Image, ImageDraw, ImageFont
+import subprocess
 import traceback
 import requests
 
@@ -101,6 +102,9 @@ try:
         else:
             logging.info( "Could not read from Inside temp/Humidity")
 
+        bashCommand = "sudo pigpiod"
+        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        output, error = process.communicate()
         logging.info("Read CO2 and TVOC...")
         if sensor.data_available():
             sensor.read_logorithm_results()
@@ -108,6 +112,10 @@ try:
             draw.text((10, 150), "CO2: {0:.1f} TVOC: {1:.1f}".format(sensor.CO2, sensor.tVOC), font = font24, fill = 0)
         elif sensor.check_for_error():
             logging.info( "Could not read from CO2/TVOC Sensor")
+
+        bashCommand = "sudo killall pigpiod"
+        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        output, error = process.communicate()
 
         epd.display(epd.getbuffer(image))
         time.sleep(30)
