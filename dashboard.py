@@ -92,7 +92,7 @@ try:
 
         # read humidity and inside temp
         logging.info("Read inside temperature and humidity...")
-        insideHumidity, insideTemp = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 4)
+        insideHumidity, insideTemp = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 27)
 
         if insideHumidity is not None and insideTemp is not None:
             logging.info( 'Inside temp: {:.1f}°'.format(insideTemp))
