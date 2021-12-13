@@ -105,6 +105,7 @@ try:
         bashCommand = "sudo pigpiod"
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
+        logging.info(output + error)
         logging.info("Read CO2 and TVOC...")
         if sensor.data_available():
             sensor.read_logorithm_results()
@@ -116,6 +117,7 @@ try:
         bashCommand = "sudo killall pigpiod"
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
+        logging.info(output + error)
 
         epd.display(epd.getbuffer(image))
         time.sleep(30)
