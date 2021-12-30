@@ -63,7 +63,11 @@ def setup(mode=1):
 
 
 try:
+    res = subprocess.run("sudo pigpiod", shell=True, check=True, text=True)
+    logging.info(res.stdout)
     setup(1)
+    res = subprocess.run("sudo killall pigpiod", shell=True, check=True, text=True)
+    logging.info(res.stdout)
 except IOError as e:
     logging.info(e)
 
