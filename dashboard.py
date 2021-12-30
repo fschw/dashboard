@@ -102,8 +102,8 @@ try:
         else:
             logging.info( "Could not read from Inside temp/Humidity")
 
-        res = subprocess.run("sudo pigpiod", shell=True, check=True, text=True)
-        logging.info(res.stdout)
+        #res = subprocess.run("sudo pigpiod", shell=True, check=True, text=True)
+        #logging.info(res.stdout)
 
         logging.info("Read CO2 and TVOC...")
         if sensor.data_available():
@@ -113,8 +113,8 @@ try:
         elif sensor.check_for_error():
             logging.info( "Could not read from CO2/TVOC Sensor")
 
-        res = subprocess.run("sudo killall pigpiod", shell=True, check=True, text=True)
-        logging.info(res.stdout)
+        #res = subprocess.run("sudo killall pigpiod", shell=True, check=True, text=True)
+        #logging.info(res.stdout)
 
         epd.display(epd.getbuffer(image))
         time.sleep(30)
