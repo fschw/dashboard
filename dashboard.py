@@ -105,7 +105,7 @@ try:
     loop = True
     cnt = 1
     while loop:
-        image = Image.new('1', (epd.width, epd.height), 255)
+        image = Image.new('1', (epd.width, epd.height), 0)
         draw = ImageDraw.Draw(image)
         logging.info("Updating for Iteration " + str(cnt))
         cnt = cnt + 1
