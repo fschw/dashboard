@@ -62,7 +62,7 @@ def receive_code():
 
 
 if __name__ == "__main__":
-    threading.Thread(target=app.run).start()
+    threading.Thread(target=app.run, args=['host=\'0.0.0.0\'']).start()
 
 font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
 
