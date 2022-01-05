@@ -105,7 +105,7 @@ try:
     loop = True
     cnt = 1
     while loop:
-        image = Image.new('1', (epd.width, epd.height), 0)
+        image = Image.new('1', (epd.width, epd.height), 255)
         draw = ImageDraw.Draw(image)
         logging.info("Updating for Iteration " + str(cnt))
         cnt = cnt + 1
@@ -149,7 +149,21 @@ try:
         #res = subprocess.run("sudo killall pigpiod", shell=True, check=True, text=True)
         #logging.info(res.stdout)
 
-        epd.display(epd.getbuffer(image))
+        img = epd.getbuffer(image)
+        epd.send_command(0x92);
+        epd.set_lut();
+        #epd.send_command(0x10)
+        #for i in range(0, int(self.width * self.height / 8)):
+        #    self.send_data(0xFF)
+
+        epd.send_command(0x13)
+        for i in range(0, int(epd.width * epd.height / 8)):
+            epd.send_data(img[i])
+
+        epd.send_command(0x12)
+        epd.ReadBusy()
+
+        #epd.display(epd.getbuffer(image))
         time.sleep(30)
 
 
