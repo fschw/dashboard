@@ -38,6 +38,7 @@ import traceback
 import requests
 from flask import Flask
 from flask import request
+import threading
 
 access_token = ""
 app = Flask(__name__)
@@ -61,7 +62,7 @@ def receive_code():
 
 
 if __name__ == "__main__":
-    app.run(port=4200)
+    threading.Thread(target=app.run).start()
 
 font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
 
@@ -132,7 +133,7 @@ try:
 
         #res = subprocess.run("sudo pigpiod", shell=True, check=True, text=True)
         #logging.info(res.stdout)
-
+        '''
         logging.info("Read CO2 and TVOC...")
         if sensor.data_available():
             sensor.read_logorithm_results()
@@ -140,7 +141,7 @@ try:
             draw.text((10, 150), "CO2: {0:.1f} TVOC: {1:.1f}".format(sensor.CO2, sensor.tVOC), font = font24, fill = 0)
         elif sensor.check_for_error():
             logging.info( "Could not read from CO2/TVOC Sensor")
-
+        '''
         #res = subprocess.run("sudo killall pigpiod", shell=True, check=True, text=True)
         #logging.info(res.stdout)
 
