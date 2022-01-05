@@ -114,9 +114,9 @@ try:
         response = requests.get(url=req1, headers=header)
         outsideTemp = ""
         if response.status_code is 200:
-            outsideTemp = str(response.json()["data"]["properties"]["value"]["value"])
-        logging.info('Outside temp: {:.1f}°'.format(outsideTemp))
-        draw.text((10, 0), 'Außen: {:.1f}°'.format(outsideTemp), font=font24, fill=0)
+            outsideTemp = response.json()["data"]["properties"]["value"]["value"]
+            logging.info('Outside temp: {:.1f}°'.format(outsideTemp))
+            draw.text((10, 0), 'Außen: {:.1f}°'.format(outsideTemp), font=font24, fill=0)
 
         # read humidity and inside temp
         logging.info("Read inside temperature and humidity...")
