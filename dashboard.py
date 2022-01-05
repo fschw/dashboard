@@ -149,20 +149,7 @@ try:
         #res = subprocess.run("sudo killall pigpiod", shell=True, check=True, text=True)
         #logging.info(res.stdout)
 
-        img = epd.getbuffer(image)
-        #epd.send_command(0x92);
-        #epd.set_lut();
-
-        #epd.send_command(0x10)
-        #for i in range(0, int(self.width * self.height / 8)):
-        #    self.send_data(0xFF)
-
-        epd.send_command(0x13)
-        for i in range(0, int(epd.width * epd.height / 8)):
-            epd.send_data(img[i])
-
-        epd.send_command(0x12)
-        #epd.ReadBusy()
+        epd.EPD_4IN2_PartialDisplay(10, 200, 40, 60, epd.getbuffer(image))
 
         #epd.display(epd.getbuffer(image))
         time.sleep(30)
