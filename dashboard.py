@@ -112,6 +112,7 @@ try:
 
         #read outside temp
         logging.info("Read outside temp...")
+        logging.info("Token:" + access_token)
         header = {"Authorization": "Bearer " + access_token}
         req1 = "https://api.viessmann.com/iot/v1/equipment/installations/952499/gateways/7637415022052208/devices/0/features/heating.sensors.temperature.outside"
         logging.info("reading temperature.outside")
