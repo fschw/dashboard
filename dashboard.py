@@ -150,8 +150,9 @@ try:
         #logging.info(res.stdout)
 
         img = epd.getbuffer(image)
-        epd.send_command(0x92);
-        epd.set_lut();
+        #epd.send_command(0x92);
+        #epd.set_lut();
+        
         #epd.send_command(0x10)
         #for i in range(0, int(self.width * self.height / 8)):
         #    self.send_data(0xFF)
@@ -160,8 +161,8 @@ try:
         for i in range(0, int(epd.width * epd.height / 8)):
             epd.send_data(img[i])
 
-        epd.send_command(0x12)
-        epd.ReadBusy()
+        #epd.send_command(0x12)
+        #epd.ReadBusy()
 
         #epd.display(epd.getbuffer(image))
         time.sleep(30)
