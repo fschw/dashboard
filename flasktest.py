@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 import requests
 import json
+import threading
 
 app = Flask(__name__)
 @app.route("/")
@@ -26,4 +27,5 @@ def receive_code():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=4200)
+    args = {'host': '0.0.0.0'}
+    threading.Thread(target=app.run, kwargs=args).start()
