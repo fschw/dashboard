@@ -40,7 +40,7 @@ from flask import Flask
 from flask import request
 import threading
 
-access_token = ""
+global access_token
 app = Flask(__name__)
 @app.route("/")
 def receive_code():
