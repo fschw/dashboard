@@ -149,7 +149,7 @@ try:
         #res = subprocess.run("sudo killall pigpiod", shell=True, check=True, text=True)
         #logging.info(res.stdout)
 
-        epd.EPD_4IN2_PartialDisplay(10, 200, 40, 60, epd.getbuffer(image))
+        epd.EPD_4IN2_PartialDisplay(0, 200, 0, 200, epd.getbuffer(image))
 
         #epd.display(epd.getbuffer(image))
         time.sleep(30)
