@@ -150,14 +150,22 @@ try:
         #logging.info(res.stdout)
 
         logging.info("Adding visuals to image...")
+        #house frame
         draw.line((70, 299, 330, 299), fill = 0, width = 3)
+        draw.line((70, 299, 70, 120), fill = 0, width = 3)
+        draw.line((70, 120, 330, 120), fill = 0, width = 3)
+        draw.line((330, 120, 330, 299), fill = 0, width = 3)
+
+        #roof
+        draw.line((200, 1, 0, 185), fill = 0, width = 3)
+        draw.line((200, 1, 400, 185), fill = 0, width = 3)
         '''draw.line((70, 50, 20, 100), fill = 0)
         draw.rectangle((20, 50, 70, 100), outline = 0)
         draw.line((165, 50, 165, 100), fill = 0)
         draw.line((140, 75, 190, 75), fill = 0)
         draw.arc((140, 50, 190, 100), 0, 360, fill = 0)
         draw.rectangle((80, 50, 130, 100), fill = 0)'''
-        draw.chord((200, 50, 250, 100), 0, 360, fill = 0)
+        #draw.chord((200, 50, 250, 100), 0, 360, fill = 0)
         epd.display(epd.getbuffer(image))
         time.sleep(30)
 
