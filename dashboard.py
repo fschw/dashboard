@@ -150,7 +150,7 @@ try:
         #logging.info(res.stdout)
 
         logging.info("Adding visuals to image...")
-        draw.line((70, 300, 330, 70), fill = 0)
+        draw.line((70, 299, 330, 299), fill = 0, width = 3)
         '''draw.line((70, 50, 20, 100), fill = 0)
         draw.rectangle((20, 50, 70, 100), outline = 0)
         draw.line((165, 50, 165, 100), fill = 0)
