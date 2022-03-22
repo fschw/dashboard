@@ -87,7 +87,7 @@ def setup(mode=1):
         sys.stdout.write('0')
     sys.stdout.write(str(result) + "\n")
 
-
+'''
 try:
     res = subprocess.run("sudo pigpiod", shell=True, check=True, text=True)
     logging.info(res.stdout)
@@ -96,7 +96,7 @@ try:
     logging.info(res.stdout)
 except IOError as e:
     logging.info(e)
-
+'''
 try:
     epd = epd4in2.EPD()
     logging.info("Init and Clear display")
