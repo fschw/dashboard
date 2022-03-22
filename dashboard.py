@@ -111,7 +111,7 @@ try:
         cnt = cnt + 1
 
         #read outside temp
-        logging.info("Read outside temp...")
+        '''logging.info("Read outside temp...")
         logging.info("Token:" + access_token)
         header = {"Authorization": "Bearer " + access_token}
         req1 = "https://api.viessmann.com/iot/v1/equipment/installations/952499/gateways/7637415022052208/devices/0/features/heating.sensors.temperature.outside"
@@ -134,7 +134,7 @@ try:
             draw.text((10, 100), 'Rel: {:.1f}%'.format(insideHumidity), font = font24, fill = 0)
         else:
             logging.info( "Could not read from Inside temp/Humidity")
-
+        '''
         #res = subprocess.run("sudo pigpiod", shell=True, check=True, text=True)
         #logging.info(res.stdout)
         '''
@@ -149,7 +149,15 @@ try:
         #res = subprocess.run("sudo killall pigpiod", shell=True, check=True, text=True)
         #logging.info(res.stdout)
 
-
+        logging.info("Adding visuals to image...")
+        draw.line((70, 300, 330, 70), fill = 0)
+        '''draw.line((70, 50, 20, 100), fill = 0)
+        draw.rectangle((20, 50, 70, 100), outline = 0)
+        draw.line((165, 50, 165, 100), fill = 0)
+        draw.line((140, 75, 190, 75), fill = 0)
+        draw.arc((140, 50, 190, 100), 0, 360, fill = 0)
+        draw.rectangle((80, 50, 130, 100), fill = 0)'''
+        draw.chord((200, 50, 250, 100), 0, 360, fill = 0)
         epd.display(epd.getbuffer(image))
         time.sleep(30)
 
