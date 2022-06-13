@@ -50,7 +50,7 @@ def receive_code():
         print("Code received:" + code)
         url = "https://iam.viessmann.com/idp/v2/token"
         header = {"Content-Type": "application/x-www-form-urlencoded"}
-        data = "grant_type=authorization_code&client_id=9ceff2a5f57d345a580142626e3b4a7f&redirect_uri=http://192.168.178.201:4200/&code_verifier=2e21faa1-db2c-4d0b-a10f-575fd372bc8c-575fd372bc8c&code="+code
+        data = "grant_type=authorization_code&client_id=9ceff2a5f57d345a580142626e3b4a7f&redirect_uri=http://192.168.178.202:4200/&code_verifier=2e21faa1-db2c-4d0b-a10f-575fd372bc8c-575fd372bc8c&code="+code
         response = requests.post(url=url, headers=header, data=data)
         if response.ok:
             global access_token
