@@ -111,7 +111,7 @@ try:
         cnt = cnt + 1
 
         #read outside temp
-        '''logging.info("Read outside temp...")
+        logging.info("Read outside temp...")
         logging.info("Token:" + access_token)
         header = {"Authorization": "Bearer " + access_token}
         req1 = "https://api.viessmann.com/iot/v1/equipment/installations/952499/gateways/7637415022052208/devices/0/features/heating.sensors.temperature.outside"
@@ -134,7 +134,7 @@ try:
             draw.text((10, 100), 'Rel: {:.1f}%'.format(insideHumidity), font = font24, fill = 0)
         else:
             logging.info( "Could not read from Inside temp/Humidity")
-        '''
+
         #res = subprocess.run("sudo pigpiod", shell=True, check=True, text=True)
         #logging.info(res.stdout)
         '''
@@ -165,6 +165,8 @@ try:
         y = mid*upper/(mid-left)
         draw.line((mid, 1, 0, y), fill = 0, width = 3)
         draw.line((mid, 1, 400, y), fill = 0, width = 3)
+
+        #buffer
         '''draw.line((70, 50, 20, 100), fill = 0)
         draw.rectangle((20, 50, 70, 100), outline = 0)
         draw.line((165, 50, 165, 100), fill = 0)
