@@ -4,6 +4,7 @@ import os
 import sys
 import logging
 import ccs811LIBRARY
+from paramiko import SSHClient, AutoAddPolicy
 
 logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.DEBUG,  datefmt='%Y-%m-%d %H:%M:%S')
 
@@ -109,6 +110,16 @@ try:
         draw = ImageDraw.Draw(image)
         logging.info("Updating for Iteration " + str(cnt))
         cnt = cnt + 1
+
+        #check garage door state
+        client = SSHClient()
+        client.look_for_keys(True)
+        client.connect("172.168.178.201", username = "fsc")
+        stdin, stdout, stderr = client.exec_command('cd garage & python readSwitch.py')
+        print(type(stdin))
+        print(type(stdout))
+        print(type(stderr))
+        client.close()
 
         #read outside temp
         logging.info("Read outside temp...")
