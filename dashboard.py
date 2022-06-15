@@ -104,10 +104,10 @@ except IOError as e:
 '''
 
 #check garage door state
-os.system("ssh -i /home/pi/.ssh/id_rsa.pub fsc@192.168.178.201")
-#cmd = "ssh -i /home/pi/.ssh/id_rsa.pub fsc@192.168.178.201"# & cd garage & python readSwitch.py"
-#result = subprocess.run(cmd, stdout=subprocess.PIPE)
-#print(result.stdout.decode('utf-8'))
+#os.system("ssh -i /home/pi/.ssh/id_rsa.pub fsc@192.168.178.201")
+cmd = "ssh -i /home/pi/.ssh/id_rsa.pub fsc@192.168.178.201"# & cd garage & python readSwitch.py"
+result = subprocess.run(cmd, stdout=subprocess.PIPE)
+print(result.stdout.decode('utf-8'))
 
 try:
     epd = epd4in2.EPD()
