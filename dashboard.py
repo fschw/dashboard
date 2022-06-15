@@ -114,7 +114,7 @@ try:
         cnt = cnt + 1
 
         #check garage door state
-        cmd = "ssh -i .ssh/id_rsa.pub fsc@192.168.178.201 & cd garage & python readSwitch.py"
+        cmd = "ssh -i /home/pi/.ssh/id_rsa.pub fsc@192.168.178.201 & cd garage & python readSwitch.py"
         result = subprocess.run(cmd, stdout=subprocess.PIPE)
         print(result.stdout.decode('utf-8'))
 
