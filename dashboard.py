@@ -4,7 +4,9 @@ import os
 import sys
 import logging
 import ccs811LIBRARY
-from paramiko import SSHClient, AutoAddPolicy
+import os
+import subprocess
+
 
 logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.DEBUG,  datefmt='%Y-%m-%d %H:%M:%S')
 
@@ -47,7 +49,7 @@ app = Flask(__name__)
 def receive_code():
     logging.info("HTTP req")
     code = request.args.get('code', '')
-    if code is not "":
+    if code != "":
         print("Code received:" + code)
         url = "https://iam.viessmann.com/idp/v2/token"
         header = {"Content-Type": "application/x-www-form-urlencoded"}
@@ -112,14 +114,22 @@ try:
         cnt = cnt + 1
 
         #check garage door state
-        client = SSHClient()
+        cmd = "ssh -i .ssh/id_rsa.pub fsc@192.168.178.201 & cd garage & python readSwitch.py"
+        result = subprocess.run(cmd, stdout=subprocess.PIPE)
+        print(result.stdout.decode('utf-8'))
+
+        #os.system("ssh -i .ssh/id_rsa.pub fsc@192.168.178.201")
+        #os.system("cd garage")
+        #os.system("python readSwitch.py")
+
+        '''client = SSHClient()
         client.look_for_keys(True)
         client.connect("172.168.178.201", username = "fsc")
         stdin, stdout, stderr = client.exec_command('cd garage & python readSwitch.py')
         print(type(stdin))
         print(type(stdout))
         print(type(stderr))
-        client.close()
+        client.close()'''
 
         #read outside temp
         logging.info("Read outside temp...")
