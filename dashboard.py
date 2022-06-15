@@ -90,6 +90,8 @@ def setup(mode=1):
         sys.stdout.write('0')
     sys.stdout.write(str(result) + "\n")
 
+
+#start pigpiod
 '''
 try:
     res = subprocess.run("sudo pigpiod", shell=True, check=True, text=True)
@@ -100,6 +102,12 @@ try:
 except IOError as e:
     logging.info(e)
 '''
+
+#check garage door state
+cmd = "ssh -i /home/pi/.ssh/id_rsa.pub fsc@192.168.178.201"# & cd garage & python readSwitch.py"
+result = subprocess.run(cmd, stdout=subprocess.PIPE)
+print(result.stdout.decode('utf-8'))
+
 try:
     epd = epd4in2.EPD()
     logging.info("Init and Clear display")
@@ -113,10 +121,7 @@ try:
         logging.info("Updating for Iteration " + str(cnt))
         cnt = cnt + 1
 
-        #check garage door state
-        cmd = "ssh -i /home/pi/.ssh/id_rsa.pub fsc@192.168.178.201 & cd garage & python readSwitch.py"
-        result = subprocess.run(cmd, stdout=subprocess.PIPE)
-        print(result.stdout.decode('utf-8'))
+
 
         #os.system("ssh -i .ssh/id_rsa.pub fsc@192.168.178.201")
         #os.system("cd garage")
